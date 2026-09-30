@@ -25,7 +25,7 @@ in - the rest of this file is one row per member, per milestone, against their s
 | <name>  | <feature>                    |
 | <name>  | <feature>                    |
 | <name>  | <feature>                    |
-| <name>  | <feature>                    |
+| Elroie Shiferaw | <feature>                    |
 
 <!-- Teams of four: delete the fifth row, here and in the tables below. -->
 
