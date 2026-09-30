@@ -23,7 +23,7 @@ in - the rest of this file is one row per member, per milestone, against their s
 |---------|------------------------------|
 | <name>  | <feature>                    |
 | <name>  | <feature>                    |
-| <name>  | <feature>                    |
+| Nathan Kituyi  | Player Attack System                   |
 | <name>  | <feature>                    |
 | Elroie Shiferaw | <feature>                    |
 
@@ -57,7 +57,7 @@ Worked example:
 
 | Student | Planning | Control flow | Collections | Functions |
 |---------|----------|--------------|-------------|-----------|
-| <name>  |          |              |             |           |
+| Nathan Kituyi  |     fd67043     |              |             |           |
 | <name>  |          |              |             |           |
 | <name>  |          |              |             |           |
 | <name>  |          |              |             |           |
