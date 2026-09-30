@@ -21,8 +21,8 @@ in - the rest of this file is one row per member, per milestone, against their s
 
 | Student | Slice (the feature they own) |
 |---------|------------------------------|
-| <name>  | <feature>                    |
-| <name>  | <feature>                    |
+|  <name>  | <feature>                    |
+| Jean Gabriel Lauvaih Mensah Ava  | <Ship Placement System                    |
 | <name>  | <feature>                    |
 | <name>  | <feature>                    |
 | Elroie Shiferaw | <feature>                    |

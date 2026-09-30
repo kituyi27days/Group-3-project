@@ -11,8 +11,8 @@ networked, multi-user theme - see the "Suggested projects" section of
 | Full name | GitHub username |
 |-----------|-----------------|
 | Nathan Kituyi    | @kituyi27days     |
-| <name>    | @<username>     |
-| <name>    | @<username>     |
+| Jean Gabriel Lauviah Mensah Ava    | @Jean-Lauviah     |
+| Akshat Rana   | @akshatrana-cmd     |
 | <name>    | @<username>     |
 | Elroie Shiferaw    | Elroi4004    |
 

@@ -1,10 +1,13 @@
+from board import create_board, print_board
+
+
 player : str = "Player"
 computer : str = "Computer"
 
 game_state = {
     "turn" : player,
     "winner" : None,
-    "game_over" : False
+    "game_over" : False,
 
 }
 
@@ -20,22 +23,74 @@ def switch_turn():
 
 def check_winner(player_ships, computer_ships): # players_ship, computer_ships is how many ships are remaning ////TEMPO////
     if len(player_ships) == 0:
-        return computer
+        return computer      # a ship can be hit/sunk without neccesarily being removed from player's or computer's ship list so need to look at person 2 code
     if len(computer_ships) == 0:
         return player
 
     return None 
 
+
+def choose_game_mode():
+    print("Choose game mode:")
+    print("1. Play against computer")
+    print("2. Play against another player")
+
+    choice = input("Enter 1 or 2: ")
+
+    while choice != "1" and choice != "2":
+        print("Invalid choice. Please enter 1 or 2.")
+        choice = input("Enter 1 or 2: ")
+
+    if choice == "1":
+        return "Computer"
+    else:
+        return "Player"
+
 def run_game():
+
+    game_mode = choose_game_mode()
+
+    player_board = create_board()
+    computer_board = create_board()
+
+    print("Player board:")
+    print_board(player_board, show_ships=True)
+
+    print("Computer board:")
+    print_board(computer_board)
+
+
     while game_state["game_over"] == False:
-            if game_state["turn"] == player:
-                print("Player's turn") #put player attack function here or call it
 
-            else: 
-                print("Computers turn") #put computer function here or call it
+        if game_state["turn"] == player:
+            print("Player's turn")
 
+            # call Person 3's attack function here
+
+        else:
+            :
+            if game_mode == "Computer":
+                print("Computer's turn")
+
+        # call Person 4's attack function here
+
+            else:
+                print("Player 2's turn")
+
+        # call the player 2 attack function here
+
+            # call Person 4's attack function here
+
+        # check if someone won
+
+        if game_state["winner"] != None:
+            game_state["game_over"] = True
+        else:
             switch_turn()
 
+if __name__ == "__main__":
+    
+    run_game()
 
 
 # while game isn't over:
