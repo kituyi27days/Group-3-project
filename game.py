@@ -8,6 +8,9 @@ game_state = {
 
 }
 
+# call the function that has all the ships and let the player place them, we already have the function that checks wether a postion is allowed or not so if it is allowed i'll call the function and make the player select their position for their ships
+
+
 def switch_turn():
     if game_state["turn"] == player:
         game_state["turn"] = computer
