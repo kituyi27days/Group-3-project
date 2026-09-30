@@ -57,7 +57,7 @@ Worked example:
 
 | Student | Planning | Control flow | Collections | Functions |
 |---------|----------|--------------|-------------|-----------|
-|  Nathan Kituyi  |  fd67043  |  9bc2db3  |             |           |
+|  Nathan Kituyi  |  fd67043  |  9bc2db3  |  150e98b  |           |
 | <name>  |          |              |             |           |
 | <name>  |          |              |             |           |
 | <name>  |          |              |             |           |

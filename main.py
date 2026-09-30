@@ -24,43 +24,77 @@ Data needed:
 - The row and column chosen by the player  
 - Values used to represent ships, hits, misses, and empty spaces
 """
-#Initializing array that storeres all previous attacks
+BOARD_SIZE = 10
+SHIP = "S"
+HIT = "X"
+MISS = "O"
+
+# Stores coordinates the player has already attacked
 previous_attacks = []
 
-#asking the player to enter a row and column to attack
+#Function to get the attack coordinates from the player and validate them
+def get_attack_coordinates():
 
-attack_row = int(input("Enter the row you want to attack between 0 and 9 (inclusive): "))
-attack_column = int(input("Enter the column you wabnt to attack between 0 and 9 (inclusive): "))
+    attack_row = int(input("Enter the row you want to attack between 0 and 9 (inclusive): "))
+    attack_column = int(input("Enter the column you want to attack between 0 and 9 (inclusive): "))
 
-#checking weather values input are valid
-flag = False
-while flag == False:
+    flag = False
 
-    #Validfating the row values
-    if attack_row < 0 or attack_row > 9:
-        print("Invalid row. Please enter a value between 0 and 9.")
-        attack_row = int(input("Enter the row you want to attack between 0 and 9 (inclusive): "))
-    #Validating the column values
-    elif attack_column < 0 or attack_column > 9:
-        print("Invalid column. Please enter a value between 0 and 9.")
-        attack_column = int(input("Enter the column you want to attack between 0 and 9 (inclusive): "))
+    while flag == False:
 
-    # Check if this location has already been attacked
-    elif [attack_row, attack_column] in previous_attacks:
-        print("You already attacked this location.")
-        attack_row = int(input("Enter a different row: "))
-        attack_column = int(input("Enter a different column: "))
-    
+        if attack_row < 0 or attack_row >= BOARD_SIZE:
+            print("Invalid row. Please enter a value between 0 and 9.")
+
+            attack_row = int(input("Enter the row you want to attack between 0 and 9 (inclusive): "))
+
+        elif attack_column < 0 or attack_column >= BOARD_SIZE:
+            print("Invalid column. Please enter a value between 0 and 9.")
+
+            attack_column = int(input("Enter the column you want to attack between 0 and 9 (inclusive): "))
+
+        else:
+            flag = True
+
+    return attack_row, attack_column
+
+#Function to check if the player has already attacked the chosen position
+def already_attacked(attack_row, attack_column, previous_attacks):
+
+    if [attack_row, attack_column] in previous_attacks:
+        return True
+
     else:
-        #store new value in array 
-        previous_attacks.append([attack_row, attack_column])
+        return False
 
-        print("Attack accepted.")
-        print("Previous attacks:", previous_attacks)
+#Function to store the attack coordinates in the previous_attacks list
+def record_attack(attack_row, attack_column, previous_attacks):
 
-        flag = True
+    previous_attacks.append([attack_row, attack_column])
 
-  
+#Function to handle the player's attack on the opponent's board
+def player_attack(board, previous_attacks):
+
+    valid_attack = False
+
+    while valid_attack == False:
+
+        attack_row, attack_column = get_attack_coordinates()
+
+        if already_attacked(attack_row, attack_column, previous_attacks):
+            print("You already attacked this location. Choose another location.")
+
+        else:
+            record_attack(attack_row, attack_column, previous_attacks)
+
+            if board[attack_row][attack_column] == SHIP:
+                board[attack_row][attack_column] = HIT
+                print("Hit!")
+
+            else:
+                board[attack_row][attack_column] = MISS
+                print("Miss!")
+
+            valid_attack = True
 
 
 
