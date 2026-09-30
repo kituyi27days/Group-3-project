@@ -47,3 +47,24 @@ implemented - what it does, its complexity, and why that is fast enough here.>
 > them in together, and fill in the slices table in `CONTRIBUTIONS.md` at the same time.
 > From Milestone 1 on, grow "The application" and "Running it" into a real README for your
 > project, and keep the team table, the tech plan, and these pointers.
+>
+| Constant | Value | What it means |
+|---|---:|---|
+| `BOARD_SIZE` | `10` | The board is 10 × 10 |
+| `EMPTY` | `"~"` | An untouched water position |
+| `SHIP` | `"S"` | A position containing a ship |
+| `HIT` | `"X"` | A ship position that has been hit |
+| `MISS` | `"O"` | An attack that missed |
+| `HORIZONTAL` | `"H"` | Horizontal ship placement |
+| `VERTICAL` | `"V"` | Vertical ship placement |
+| `PLAYER` | `"Player"` | Used when referring to the human player |
+| `COMPUTER` | `"Computer"` | Used when referring to the computer |
+| `TOTAL_SHIPS` | `5` | Number of ships each player has |
+
+| Ship | Size |
+|---|---:|
+| Carrier | 5 |
+| Battleship | 4 |
+| Cruiser | 3 |
+| Submarine | 3 |
+| Destroyer | 2 |
