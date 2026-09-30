@@ -12,7 +12,7 @@ networked, multi-user theme - see the "Suggested projects" section of
 |-----------|-----------------|
 | Nathan Kituyi    | @kituyi27days     |
 | Jean Gabriel Lauviah Mensah Ava    | @Jean-Lauviah     |
-| <name>    | @<username>     |
+| <Akshat>    | @<akshatrana-cmd>     |
 | <name>    | @<username>     |
 | Elroie Shiferaw    | Elroi4004    |
 
