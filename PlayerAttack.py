@@ -14,7 +14,7 @@ Steps:
 1. Ask the player to enter a row and column to attack.  
 2. Check that the chosen position is inside the board.  
 3. Check that the player has not already attacked that position.  
-4. Check whether there is a ship at the chosen position.  
+4. Check whether there is a ship at the chosen position.  c
 5. Record the attack as either a hit or a miss.  
 6. Update the board and save the attacked position.
 
