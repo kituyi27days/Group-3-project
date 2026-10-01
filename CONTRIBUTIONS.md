@@ -21,17 +21,14 @@ in - the rest of this file is one row per member, per milestone, against their s
 
 | Student | Slice (the feature they own) |
 |---------|------------------------------|
-<<<<<<< HEAD
 |  <name>  | <feature>                    |
 | Jean Gabriel Lauvaih Mensah Ava  | <Ship Placement System                    |
 | <name>  | <feature>                    |
-=======
 | <name>  | <feature>                    |
 | <name>  | <feature>                    |
 | Nathan Kituyi  | Player Attack System                   |
->>>>>>> origin/player-attack
 | <name>  | <feature>                    |
-| Elroie Shiferaw | <feature>                    |
+| Elroie Shiferaw | Game Control                   |
 
 <!-- Teams of four: delete the fifth row, here and in the tables below. -->
 
@@ -67,7 +64,7 @@ Worked example:
 | <name>  |          |              |             |           |
 | <name>  |          |              |             |           |
 | <name>  |          |              |             |           |
-| <name>  |          |              |             |           |
+| Elroie Shiferaw  | 3d4cff9         | 3d4cff9             | ce4b2f3            |ce4b2f3           |
 
 <!-- Optional but recommended: a line per member saying which function or file to look at. -->
 

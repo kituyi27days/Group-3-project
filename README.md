@@ -2,24 +2,15 @@
 
 ## The application
 
-<Two or three sentences: what are you building, and who plays or uses it? It has to fit the
-networked, multi-user theme - see the "Suggested projects" section of
-[`MILESTONES.md`](MILESTONES.md). Name one of the suggestions, or describe your own idea.>
-
+We are building a networked, multiplayer Battleship game where two players can play against each other or against a computer. Each player places their ships on a board and takes turns attacking the other player's board until one player wins.
 ## The team
 
 | Full name | GitHub username |
 |-----------|-----------------|
-<<<<<<< HEAD
 | Nathan Kituyi    | @kituyi27days     |
 | Jean Gabriel Lauviah Mensah Ava    | @Jean-Lauviah     |
 | Akshat Rana   | @akshatrana-cmd     |
-=======
 | Nathan Kituyi    | kituyi27days     |
-| <name>    | @<username>     |
-| <name>    | @<username>     |
->>>>>>> origin/player-attack
-| <name>    | @<username>     |
 | Elroie Shiferaw    | Elroi4004    |
 
 Note:  Be sure to [add all of the group members to as collaborators on this repository](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/repository-access-and-collaboration/inviting-collaborators-to-a-personal-repository).
