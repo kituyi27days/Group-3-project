@@ -21,9 +21,15 @@ in - the rest of this file is one row per member, per milestone, against their s
 
 | Student | Slice (the feature they own) |
 |---------|------------------------------|
+<<<<<<< HEAD
 |  <name>  | <feature>                    |
 | Jean Gabriel Lauvaih Mensah Ava  | <Ship Placement System                    |
 | <name>  | <feature>                    |
+=======
+| <name>  | <feature>                    |
+| <name>  | <feature>                    |
+| Nathan Kituyi  | Player Attack System                   |
+>>>>>>> origin/player-attack
 | <name>  | <feature>                    |
 | Elroie Shiferaw | <feature>                    |
 
@@ -57,7 +63,7 @@ Worked example:
 
 | Student | Planning | Control flow | Collections | Functions |
 |---------|----------|--------------|-------------|-----------|
-| <name>  |          |              |             |           |
+|  Nathan Kituyi  |  fd67043  |  9bc2db3  |  150e98b  |  649f4d0  |
 | <name>  |          |              |             |           |
 | <name>  |          |              |             |           |
 | <name>  |          |              |             |           |

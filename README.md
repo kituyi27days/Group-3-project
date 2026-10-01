@@ -10,9 +10,15 @@ networked, multi-user theme - see the "Suggested projects" section of
 
 | Full name | GitHub username |
 |-----------|-----------------|
+<<<<<<< HEAD
 | Nathan Kituyi    | @kituyi27days     |
 | Jean Gabriel Lauviah Mensah Ava    | @Jean-Lauviah     |
 | Akshat Rana   | @akshatrana-cmd     |
+=======
+| Nathan Kituyi    | kituyi27days     |
+| <name>    | @<username>     |
+| <name>    | @<username>     |
+>>>>>>> origin/player-attack
 | <name>    | @<username>     |
 | Elroie Shiferaw    | Elroi4004    |
 
