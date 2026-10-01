@@ -23,7 +23,7 @@ in - the rest of this file is one row per member, per milestone, against their s
 |---------|------------------------------|
 |  <name>  | <feature>                    |
 | Jean Gabriel Lauvaih Mensah Ava  | <Ship Placement System                    |
-| <name>  | <feature>                    |
+| Nathan Kituyi  | Player Attack System                    |
 | <name>  | <feature>                    |
 | Elroie Shiferaw | <feature>                    |
 
@@ -59,7 +59,7 @@ Worked example:
 |---------|----------|--------------|-------------|-----------|
 | <name>  |          |              |             |           |
 | <name>  |          |              |             |           |
-| <name>  |          |              |             |           |
+| Nathan Kituyi  |  fd67043  |  9bc2db3  |  150e98b  |  649f4d0  |
 | <name>  |          |              |             |           |
 | <name>  |          |              |             |           |
 
