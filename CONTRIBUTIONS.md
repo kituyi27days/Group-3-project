@@ -24,7 +24,7 @@ in - the rest of this file is one row per member, per milestone, against their s
 |  <name>  | <feature>                    |
 | Jean Gabriel Lauvaih Mensah Ava  | <Ship Placement System                    |
 | Nathan Kituyi  | Player Attack System                    |
-| <name>  | <feature>                    |
+| Alesha Husnain | Computer |
 | Elroie Shiferaw | <feature>                    |
 
 <!-- Teams of four: delete the fifth row, here and in the tables below. -->
@@ -58,7 +58,7 @@ Worked example:
 | Student | Planning | Control flow | Collections | Functions |
 |---------|----------|--------------|-------------|-----------|
 | <name>  |          |              |             |           |
-| <name>  |          |              |             |           |
+| Alesha Husnain  |  cd950ee|   cd950ee|    cd950ee |  cd950ee|
 | Nathan Kituyi  |  fd67043  |  9bc2db3  |  150e98b  |  649f4d0  |
 | <name>  |          |              |             |           |
 | <name>  |          |              |             |           |
