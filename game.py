@@ -1,4 +1,6 @@
 from board import create_board, print_board
+from Computer import computer_attack
+from PlayerAttack import player_attack
 
 
 player : str = "Player"
@@ -47,11 +49,15 @@ def choose_game_mode():
         return "Player"
 
 def run_game():
+    
 
     game_mode = choose_game_mode()
 
     player_board = create_board()
     computer_board = create_board()
+
+    computer_previous_attacks = []
+    player_previous_attacks = []
 
     print("Player board:")
     print_board(player_board, show_ships=True)
@@ -64,13 +70,14 @@ def run_game():
 
         if game_state["turn"] == player:
             print("Player's turn")
-
+            player_attack(computer_board, player_previous_attacks)
             # call Person 3's attack function here
 
         else:
-            :
+        
             if game_mode == "Computer":
-                print("Computer's turn")
+                print("Computers turn")
+                computer_attack(player_board, computer_previous_attacks)
 
         # call Person 4's attack function here
 

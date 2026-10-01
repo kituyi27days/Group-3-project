@@ -38,7 +38,9 @@ def record_attack(attack_row, attack_col, computer_previous_attacks):
 def computer_attack(game_board, computer_previous_attacks):
     valid_attack = False
 
-    while valid_attack == false:
+    while valid_attack == False:
+        print("Previous attacks:", computer_previous_attacks)
+
 
         # board size comes form borad.py
         # #randint includes 0-9 size of board
