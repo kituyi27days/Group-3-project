@@ -24,8 +24,13 @@ in - the rest of this file is one row per member, per milestone, against their s
 |  <name>  | <feature>                    |
 | Jean Gabriel Lauvaih Mensah Ava  | <Ship Placement System                    |
 | <name>  | <feature>                    |
+<<<<<<< Updated upstream
+=======
 | <name>  | <feature>                    |
-| Elroie Shiferaw | <feature>                    |
+| Nathan Kituyi  | Player Attack System                   |
+>>>>>>> Stashed changes
+| <name>  | <feature>                    |
+| Elroie Shiferaw | Game control system                    |
 
 <!-- Teams of four: delete the fifth row, here and in the tables below. -->
 
@@ -61,7 +66,7 @@ Worked example:
 | <name>  |          |              |             |           |
 | <name>  |          |              |             |           |
 | <name>  |          |              |             |           |
-| <name>  |          |              |             |           |
+| Elroie Shiferaw  |b98eb92         |b98eb92      |ce4b2f3             |ce4b2f3      |
 
 <!-- Optional but recommended: a line per member saying which function or file to look at. -->
 
