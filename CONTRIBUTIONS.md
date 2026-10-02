@@ -23,9 +23,9 @@ in - the rest of this file is one row per member, per milestone, against their s
 |---------|------------------------------|
 |  <name>  | <feature>                    |
 | Jean Gabriel Lauvaih Mensah Ava  | <Ship Placement System                    |
-| Nathan Kituyi  | Player Attack System                    |
+| Nathan Kituyi  | Player Attack System             |
 | Alesha Husnain | Computer |
-| Elroie Shiferaw | <feature>                    |
+| Elroie Shiferaw | Game-Control                    |
 
 <!-- Teams of four: delete the fifth row, here and in the tables below. -->
 
@@ -58,10 +58,12 @@ Worked example:
 | Student | Planning | Control flow | Collections | Functions |
 |---------|----------|--------------|-------------|-----------|
 | <name>  |          |              |             |           |
-| Alesha Husnain  |  cd950ee|   cd950ee|    cd950ee |  cd950ee|
-| Nathan Kituyi  |  fd67043  |  9bc2db3  |  150e98b  |  649f4d0  |
+| Alesha Husnain  |  cd950ee  |   cd950ee |    cd950ee |  cd950ee|
+| Nathan Kituyi   |  fd67043  |  9bc2db3  |  150e98b   |  649f4d0|
+| Elroie Shiferaw |  3d4cff9  | 3d4cff9   |  ce4b2f3   | ce4b2f3 |
 | <name>  |          |              |             |           |
-| <name>  |          |              |             |           |
+
+Elroie Shiferaw- On branch game-control look at game.py
 
 <!-- Optional but recommended: a line per member saying which function or file to look at. -->
 
