@@ -1,5 +1,15 @@
 import json
+import argparse
 
+parser = argparse.ArgumentParser()
+
+parser.add_argument(
+    "--show-history",
+    action="store_true",
+    help="Show the player's previous attack coordinates"
+)
+
+args = parser.parse_args()
 
 BOARD_SIZE = 10
 SHIP = "S"
@@ -9,10 +19,11 @@ MISS = "O"
 
 class PlayerAttack:
 
-    def __init__(self):
+    def __init__(self, show_history=False):
         self.previous_attacks = []
         self.hits = 0
         self.misses = 0
+        self.show_history = show_history 
 
 
     def get_attack_coordinates(self):
@@ -60,6 +71,10 @@ class PlayerAttack:
 
 
     def attack(self, board):
+
+        if self.show_history:
+            print("Previous attacks: ", self.previous_attacks)
+
         attack_row, attack_column = self.get_attack_coordinates()
 
         if self.already_attacked(attack_row, attack_column):
