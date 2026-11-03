@@ -73,7 +73,7 @@ changed and how you tested it.
 |---------|-----------------|-------------|
 | <name>  |                 |             |
 | <name>  |                 |             |
-| <name>  |                 |             |
+| Nathan Kituyi  | ChatGpt | i used it to help me decompose the task and also used it to make my presentation sound better |
 | <name>  |                 |             |
 | <name>  |                 |             |
 
