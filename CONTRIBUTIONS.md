@@ -73,7 +73,7 @@ Elroie Shiferaw- On branch game-control look at game.py
 |---------|-----|----------|-----------|-------------------|---------------------|
 | <name>  |     |          |           |                   |                     |
 | <name>  |     |          |           |                   |                     |
-| Nathan Kituyi  | 205fa75 | 453be4b         |  efe6768         |                   |                     |
+| Nathan Kituyi  | 205fa75 | 453be4b         |  efe6768         |  ef4fbbc                 |                     |
 | <name>  |     |          |           |                   |                     |
 | <name>  |     |          |           |                   |                     |
 
