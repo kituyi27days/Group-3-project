@@ -65,5 +65,21 @@ class PlayerAttack:
                     print("Miss!")
 
                 valid_attack = True
+    
+    def to_dict(self):
+        data = {
+            "previous_attacks": self.previous_attacks,
+            "hits": self.hits,
+            "misses": self.misses
+        }
+
+        return data
+    
+    def from_dict(self):
+        self.previous_attacks = data["previous_attacks"]
+        self.hits = data["hits"]
+        self.misses = data["misses"]
+
+        
 
 
