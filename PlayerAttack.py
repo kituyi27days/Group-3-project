@@ -11,6 +11,7 @@ parser.add_argument(
 
 args = parser.parse_args()
 
+
 BOARD_SIZE = 10
 SHIP = "S"
 HIT = "X"
@@ -93,6 +94,30 @@ class PlayerAttack:
             print("Miss!")
 
 
+    def attack_at(self, board, attack_row, attack_column):
+
+        if attack_row < 0 or attack_row >= BOARD_SIZE:
+            return "Invalid row"
+
+        if attack_column < 0 or attack_column >= BOARD_SIZE:
+            return "Invalid column"
+
+        if self.already_attacked(attack_row, attack_column):
+            return "Already attacked"
+
+        self.record_attack(attack_row, attack_column)
+
+        if board[attack_row][attack_column] == SHIP:
+            board[attack_row][attack_column] = HIT
+            self.hits += 1
+            return "Hit!"
+
+        else:
+            board[attack_row][attack_column] = MISS
+            self.misses += 1
+            return "Miss!"
+    
+
     def to_dict(self):
 
         data = {
@@ -159,6 +184,8 @@ class PlayerAttack:
 
         except json.JSONDecodeError:
             print("The save file is empty or invalid.")
+
+    
 
 
 
