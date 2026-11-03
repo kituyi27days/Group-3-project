@@ -60,34 +60,22 @@ class PlayerAttack:
 
 
     def attack(self, board):
+        attack_row, attack_column = self.get_attack_coordinates()
 
-        valid_attack = False
+        if self.already_attacked(attack_row, attack_column):
+            print("You already attacked this location. Choose another location.")
+            return self.attack(board)
 
-        while valid_attack == False:
+        self.record_attack(attack_row, attack_column)
 
-            attack_row, attack_column = self.get_attack_coordinates()
-
-            if self.already_attacked(attack_row, attack_column):
-                print("You already attacked this location. Choose another location.")
-
-            else:
-                self.record_attack(attack_row, attack_column)
-
-                if board[attack_row][attack_column] == SHIP:
-
-                    board[attack_row][attack_column] = HIT
-                    self.hits += 1
-
-                    print("Hit!")
-
-                else:
-
-                    board[attack_row][attack_column] = MISS
-                    self.misses += 1
-
-                    print("Miss!")
-
-                valid_attack = True
+        if board[attack_row][attack_column] == SHIP:
+            board[attack_row][attack_column] = HIT
+            self.hits += 1
+            print("Hit!")
+        else:
+            board[attack_row][attack_column] = MISS
+            self.misses += 1
+            print("Miss!")
 
 
     def to_dict(self):
@@ -156,6 +144,9 @@ class PlayerAttack:
 
         except json.JSONDecodeError:
             print("The save file is empty or invalid.")
+
+
+
 
 
     
