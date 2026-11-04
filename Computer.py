@@ -3,13 +3,15 @@
 import board
 # computer generates random row col to attack
 import random
+import json
 
 
 class ComputerOpponent:
     def __init__(self, difficulty="easy"):
         self.difficulty = difficulty
         self.computer_previous_attacks = [] # stores locations alr attacked
-
+        self.hits = 0
+        self.misses = 0
 #Create computer opponent
 
 # repeat till gets a valid attack
@@ -71,17 +73,36 @@ class ComputerOpponent:
                 # refer to board class - check if the attack was a hit or miss
                 if game_board[attack_row][attack_col] == board.SHIP:
                     game_board[attack_row][attack_col] = board.HIT
+                    self.hits+=1
                     print("Computer hit a ship!")
  
                 else:
                     #no ship at the location
                     game_board[attack_row][attack_col] = board.MISS
+                    self.misses+=1
                     print("Computer missed")
+
         
                 # successful at making an attack so end loop 
                 valid_attack = True
 
         return attack_row, attack_col
+    # SAVE FILE I/O --> reading/writing to json file 
+    def save_data(self): # creats dictionary with the data
+        data = {"difficulty": self.difficulty, "hits": self.hits ,"misses":self.misses ,"attacks": self.computer_previous_attacks}
+
+        with open("computer_s.json","w") as file:
+            json.dump(data, file, indent = 4) #writes data into the file
+    def load_data(self): # LOADS DATA INTO FILE 
+        try:
+            with open("computer_s.json", "r") as file:
+                data = json.load(file) #load reads the saved data dictionary and restores
+                self.difficulty = data["difficulty"]
+                self.hits = data["hits"]
+                self.misses = data["misses"]
+                self.computer_previous_attacks = data["attacks"]
+        except FileNotFoundError:
+            print("File does not exist")
 
 
 
