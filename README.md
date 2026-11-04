@@ -10,7 +10,11 @@ We are building a networked, multiplayer Battleship game where two players can p
 | Nathan Kituyi    | @kituyi27days     |
 | Jean Gabriel Lauviah Mensah Ava    | @Jean-Lauviah     |
 | Akshat Rana   | @akshatrana-cmd     |
+<<<<<<< HEAD
 | Nathan Kituyi    | kituyi27days     |
+=======
+| Alesha Husnain    | @aleshahusnain24 |
+>>>>>>> a629fb8375ef1139b7fbcd118d342ab13cf7da0e
 | Elroie Shiferaw    | Elroi4004    |
 
 Note:  Be sure to [add all of the group members to as collaborators on this repository](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/repository-access-and-collaboration/inviting-collaborators-to-a-personal-repository).
