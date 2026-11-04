@@ -4,6 +4,7 @@ import board
 # computer generates random row col to attack
 import random
 import json
+import argparse
 
 
 class ComputerOpponent:
@@ -127,25 +128,16 @@ class ComputerOpponent:
         #RECURSIVE : moves on to next positon to check 
         return self.all_positions_attacked(game_board, position +1)
 
-        
+#has computer opponents difficulty selection 
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description = "Game difficulty")
 
+    parser.add_argument("--difficulty", choices= ["easy", "medium", "hard"], default= "easy")
 
-#test save load #from Computer import ComputerOpponent
+    args = parser.parse_args() # collects the choice selected and passes it into the class
+    computer = ComputerOpponent(difficulty = args.difficulty)
 
-# c = ComputerOpponent()
-
-# c.hits = 3
-# c.misses = 2
-# c.computer_previous_attacks = [[0, 1], [1, 2]]
-
-# c.save_data()
-
-# d = ComputerOpponent()
-# d.load_data()
-
-# print(d.difficulty, d.hits, d.misses, d.computer_previous_attacks)
-
-# python -c "from Computer import ComputerOpponent; c = ComputerOpponent(); b = [['~','~'],['~','~']]; print(c.all_positions_attacked(b)); c.computer_previous_attacks = [[0,0],[0,1],[1,0],[1,1]]; print(c.all_positions_attacked(b))"
+    print("Computer difficulty: ", computer.difficulty)
 
 
 
