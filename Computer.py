@@ -1,11 +1,14 @@
 
 # 1. Connect to board branch so that the computer can choose a row col to attack
 import board
-
 # computer generates random row col to attack
 import random
 
 
+class ComputerOpponent:
+    def __init__(self, difficulty="easy"):
+        self.difficulty = difficulty
+        self.computer_previous_attacks = [] # stores locations alr attacked
 
 #Create computer opponent
 
@@ -17,55 +20,72 @@ import random
 
 
 # FROM PLAYER-ATTACK BRANCH  -  to check which locations are already attacked
-computer_previous_attacks = []
+#computer_previous_attacks = []
 
 
-#CHECK IF COMPUTER ATTACK IS VALID
-def already_attacked(attack_row, attack_col, previous_attacks):
+#CHECK IF COMPUTER ATTACK IS VALID-> ATTACKED
+    def already_attacked(self,attack_row, attack_col): # def already_attacked(attack_row, attack_col, previous_attacks):
 
-    if[attack_row, attack_col] in previous_attacks:
-        return True
-    else:
-        return False
+
+        if [attack_row, attack_col] in self.computer_previous_attacks: #if[attack_row, attack_col] in previous_attacks:
+            return True
+        else:
+            return False
 
 
 #STORE COMPUTER ATTACKS
-def record_attack(attack_row, attack_col, computer_previous_attacks):
-    computer_previous_attacks.append([attack_row, attack_col])
+    def record_attack(self,attack_row, attack_col):
+        self.computer_previous_attacks.append([attack_row, attack_col])
+
+    #STORE COMPUTER ATTACKS
+    # def record_attack(attack_row, attack_col, computer_previous_attacks):
+    #     computer_previous_attacks.append([attack_row, attack_col])
 
 
-#COPUTER ATTACK FUNCTION
-def computer_attack(game_board, computer_previous_attacks):
-    valid_attack = False
+#COMPUTER ATTACK FUNCTION
+    def computer_attack(self, game_board): #def computer_attack(game_board, computer_previous_attacks):
 
-    while valid_attack == false:
+        valid_attack = False
 
-        # board size comes form borad.py
-        # #randint includes 0-9 size of board
+        while valid_attack == False:
 
-        attack_row = random.randint(0, board.BOARD_SIZE - 1)
+            # board size comes form borad.py
+            # #randint includes 0-9 size of board
 
-        attack_col = random.randint(0, board.BOARD_SIZE - 1)
+            attack_row = random.randint(0, len(game_board) - 1)
+            #attack_row = random.randint(0, board.BOARD_SIZE - 1)
+
+            attack_col = random.randint(0, len(game_board[attack_row]) - 1)
 
 
 # check if the random genrated location is attacked already
-        if already_attacked(attack_row, attack_col,computer_previous_attacks):
-            print("Computer already attacked this location. Generating a new attack...")
-        else:
-            #store the attack in th list
-            record_attack(attack_row, attack_col, computer_previous_attacks)
-
-
-            # refer to board class - to checl if the attack was a hit or miss
-            if game_board[attack_row][attack_col] == board.SHIP:
-                game_board[attack_row][attack_col] = board.HIT
-                print("Computer hit a ship!")
-                
+            if self.already_attacked(attack_row, attack_col):
+                #  if already_attacked(attack_row, attack_col,computer_previous_attacks):
+                print("Computer already attacked this location. Generating a new attack...")
+            
             else:
-                #no ship at the location
-                game_board[attack_row][attack_col] = board.MISS
-                print("Computer missed")
+                #store the attack in th list
+                self.record_attack(attack_row, attack_col)
 
 
-            # successful at making an attack so end loop 
-            valid_attack = True
+                # refer to board class - check if the attack was a hit or miss
+                if game_board[attack_row][attack_col] == board.SHIP:
+                    game_board[attack_row][attack_col] = board.HIT
+                    print("Computer hit a ship!")
+ 
+                else:
+                    #no ship at the location
+                    game_board[attack_row][attack_col] = board.MISS
+                    print("Computer missed")
+        
+                # successful at making an attack so end loop 
+                valid_attack = True
+
+        return attack_row, attack_col
+
+
+
+
+
+
+        
