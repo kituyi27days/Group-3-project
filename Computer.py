@@ -5,7 +5,7 @@ import board
 import random
 import json
 import argparse
-
+import tkinter as tk
 
 class ComputerOpponent:
     def __init__(self, difficulty="easy"):
@@ -128,8 +128,87 @@ class ComputerOpponent:
         #RECURSIVE : moves on to next positon to check 
         return self.all_positions_attacked(game_board, position +1)
 
-#has computer opponents difficulty selection 
-if __name__ == "__main__":
+
+    
+    # TUI INTERFACE ->have tkinter button for option difficulty selection menu
+    def computer_display(self):
+         # create window
+        display = tk.Tk()
+        display.title("Battleship - Computer Opponent")
+        display.geometry("350x350")
+
+
+
+
+        # TEST board
+        game_board = [[board.EMPTY for col in range(10)]for row in range(10)]
+        # add sample ships to the board
+        game_board[0][0] = board.SHIP
+        game_board[4][5] = board.SHIP
+        game_board[9][9] = board.SHIP
+
+
+
+        # heading
+        heading = tk.Label(display, text="BATTLESHIP\nCOMPUTER OPPONENT", font=("Arial", 16, "bold"))
+        heading.pack(pady=15)
+
+        # display difficulty
+        difficulty_label = tk.Label(display, text="Difficulty: " + self.difficulty, font=("Arial", 12))
+        difficulty_label.pack(pady=5)
+
+        # display status
+        updated_label = tk.Label(display, text="Choose an option:", font=("Arial", 11))
+        updated_label.pack(pady=10)
+
+        # display hits, misses and attacks
+        display_label = tk.Label(display,   text="Hits: 0 | Misses: 0 | Attacks: 0",    font=("Arial", 11))
+        display_label.pack(pady=5)
+
+        # update statistics after an attack
+        def update_values():
+            display_label.config(
+                text="Hits: " + str(self.hits)+" | Misses: " + str(self.misses)+" | Attacks: " + str(len(self.computer_previous_attacks)))
+
+
+         # BUTTON 1 - computer attack
+        def make_attack():
+            result = self.computer_attack(game_board)
+
+            if result is None:
+                updated_label.config(text="All positions are attacked!")
+            else:
+                row, col = result
+                updated_label.config(text="Computer attacked row " + str(row)+ ", column " + str(col))
+
+            update_values()
+        attack_button = tk.Button(display, text="Computer Attack", width=22, command=make_attack)
+        attack_button.pack(pady=8)
+
+
+         # BUTTON 2 - view update vlaues for hit miss or attack
+        def view_statistics():
+            updated_label.config(text="Hits: " + str(self.hits) + " | Misses: " + str(self.misses) + " | Total attacks: " + str(len(self.computer_previous_attacks)))
+
+        #menu option 
+        stats_button = tk.Button(display, text="View updated values",width=22, command=view_statistics)
+        stats_button.pack(pady=8)
+
+        # BUTTON 3 - exit
+        exit_button = tk.Button(display, text="Exit", width=22, command=display.destroy)
+        exit_button.pack(pady=8)
+
+        # keep window open
+        display.mainloop()
+
+        
+
+
+
+
+        
+#ARGPARSE -->has computer opponents difficulty selection 
+if __name__ == "__main__":  # file can be imported 
     parser = argparse.ArgumentParser(description = "Game difficulty")
 
     parser.add_argument("--difficulty", choices= ["easy", "medium", "hard"], default= "easy")
@@ -137,7 +216,8 @@ if __name__ == "__main__":
     args = parser.parse_args() # collects the choice selected and passes it into the class
     computer = ComputerOpponent(difficulty = args.difficulty)
 
-    print("Computer difficulty: ", computer.difficulty)
+    computer.computer_display()
+
 
 
 
