@@ -5,6 +5,7 @@ SHIP = "S"
 HIT = "X"
 MISS = "O"
 board = []
+# At the top, I defined constants for the board size and game symbols.
 def create_board(size=BOARD_SIZE):
     # """Creates a 10x10 board filled with '~' using simple loops."""
      #board = []
@@ -24,6 +25,7 @@ def create_board(size=BOARD_SIZE):
 
 def print_board(board, show_ships=False):
     """Prints the board cleanly with row and column numbers."""
+    #I print the header numbers 0 through 9 across the top and left sides so players have clear row and column coordinates.
 
     print("   0 1 2 3 4 5 6 7 8 9")
     print("  ---------------------")
@@ -49,7 +51,7 @@ def display_doard(board, show_ships=True):
 
     print("   0 1 2 3 4 5 6 7 8 9")
     print("  ---------------------")
-
+#Prints the column header numbers (0 through 9) and a line divider across the top.
 
     row_number = 0
     for row in board:
@@ -68,9 +70,7 @@ def display_doard(board, show_ships=True):
 
 print_board(create_board())
 
-board[0][0] = SHIP
 
-display_doard(board)
 
 
 
