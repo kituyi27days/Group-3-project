@@ -47,8 +47,12 @@ class ComputerOpponent:
 #COMPUTER ATTACK FUNCTION
     def computer_attack(self, game_board): #def computer_attack(game_board, computer_previous_attacks):
 
-        valid_attack = False
+        if self.all_positions_attacked(game_board):  # recursion function 
+            print("Computer attacked at every position!")
+            return None # all positions are taken
 
+        valid_attack = False
+        
         while valid_attack == False:
 
             # board size comes form borad.py
@@ -104,7 +108,44 @@ class ComputerOpponent:
         except FileNotFoundError:
             print("File does not exist")
 
+    def all_positions_attacked(self, game_board, position=0): # check if attacked every position on board
+        total_positions = len(game_board) * len(game_board[0]) #10*10
 
+        # BASE CASE
+        if position  == total_positions: 
+            return True
+
+        columns  = len(game_board[0]) # to figure out row and col of position num
+        row = position // columns
+        col = position % columns
+
+        # now check if its attacked or not 
+
+        if not self.already_attacked(row,col):
+            return False
+
+        #RECURSIVE : moves on to next positon to check 
+        return self.all_positions_attacked(game_board, position +1)
+
+        
+
+
+#test save load #from Computer import ComputerOpponent
+
+# c = ComputerOpponent()
+
+# c.hits = 3
+# c.misses = 2
+# c.computer_previous_attacks = [[0, 1], [1, 2]]
+
+# c.save_data()
+
+# d = ComputerOpponent()
+# d.load_data()
+
+# print(d.difficulty, d.hits, d.misses, d.computer_previous_attacks)
+
+# python -c "from Computer import ComputerOpponent; c = ComputerOpponent(); b = [['~','~'],['~','~']]; print(c.all_positions_attacked(b)); c.computer_previous_attacks = [[0,0],[0,1],[1,0],[1,1]]; print(c.all_positions_attacked(b))"
 
 
 
