@@ -23,9 +23,18 @@ in - the rest of this file is one row per member, per milestone, against their s
 |---------|------------------------------|
 |  <name>  | <feature>                    |
 | Jean Gabriel Lauvaih Mensah Ava  | <Ship Placement System                    |
+<<<<<<< HEAD
 | <name>  | <feature>                    |
 | <name>  | <feature>                    |
-| Elroie Shiferaw | <feature>                    |
+| <name>  | <feature>                    |
+| Nathan Kituyi  | Player Attack System                   |
+| <name>  | <feature>                    |
+| Elroie Shiferaw | Game Control                   |
+=======
+| Nathan Kituyi  | Player Attack System             |
+| Alesha Husnain | Computer |
+| Elroie Shiferaw | Game-Control                    |
+>>>>>>> a629fb8375ef1139b7fbcd118d342ab13cf7da0e
 
 <!-- Teams of four: delete the fifth row, here and in the tables below. -->
 
@@ -57,11 +66,19 @@ Worked example:
 
 | Student | Planning | Control flow | Collections | Functions |
 |---------|----------|--------------|-------------|-----------|
+|  Nathan Kituyi  |  fd67043  |  9bc2db3  |  150e98b  |  649f4d0  |
 | <name>  |          |              |             |           |
+| Alesha Husnain  |  cd950ee  |   cd950ee |    cd950ee |  cd950ee|
+| Nathan Kituyi   |  fd67043  |  9bc2db3  |  150e98b   |  649f4d0|
+| Elroie Shiferaw |  3d4cff9  | 3d4cff9   |  ce4b2f3   | ce4b2f3 |
 | <name>  |          |              |             |           |
+<<<<<<< HEAD
 | <name>  |          |              |             |           |
-| <name>  |          |              |             |           |
-| <name>  |          |              |             |           |
+| Elroie Shiferaw  | 3d4cff9         | 3d4cff9             | ce4b2f3            |ce4b2f3           |
+=======
+
+Elroie Shiferaw- On branch game-control look at game.py
+>>>>>>> a629fb8375ef1139b7fbcd118d342ab13cf7da0e
 
 <!-- Optional but recommended: a line per member saying which function or file to look at. -->
 
@@ -71,8 +88,8 @@ Worked example:
 |---------|-----|----------|-----------|-------------------|---------------------|
 | <name>  |     |          |           |                   |                     |
 | <name>  |     |          |           |                   |                     |
-| <name>  |     |          |           |                   |                     |
-| <name>  |     |          |           |                   |                     |
+| Nathan Kituyi  | 205fa75 | 453be4b |  efe6768 |  ef4fbbc |    |
+| Alesha Husnain  | c7759ee | a8c3566 |e07f827  |  444c421  |44366c6   |
 | <name>  |     |          |           |                   |                     |
 
 ## Milestone 3 - Final Product (Units 04-05)
