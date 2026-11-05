@@ -1,6 +1,7 @@
-from board import create_board, print_board
+from board import create_board, print_board, SHIP
 from Computer import computer_attack
-from PlayerAttack import player_attack
+from PlayerAttack import PlayerAttack
+from ship import create_fleet, setup_fleet, setup_computer_fleet, clear_screen
 
 
 player : str = "Player"
@@ -23,13 +24,25 @@ def switch_turn():
         game_state["turn"] = player
 
 
-def check_winner(player_ships, computer_ships): # players_ship, computer_ships is how many ships are remaning ////TEMPO////
-    if len(player_ships) == 0:
-        return computer      # a ship can be hit/sunk without neccesarily being removed from player's or computer's ship list so need to look at person 2 code
-    if len(computer_ships) == 0:
+def check_winner(player_board, computer_board):
+    player_has_ships = False
+    computer_has_ships = False
+
+    for row in player_board:
+        if SHIP in row:
+            player_has_ships = True
+
+    for row in computer_board:
+        if SHIP in row:
+            computer_has_ships = True
+
+    if not player_has_ships:
+        return computer
+
+    if not computer_has_ships:
         return player
 
-    return None 
+    return None
 
 
 def choose_game_mode():
@@ -55,45 +68,99 @@ def run_game():
 
     player_board = create_board()
     computer_board = create_board()
+    
+
+    if game_mode == "Player":
+        # Create separate ships for each player.
+        player_ships = create_fleet()
+        second_player_ships = create_fleet()
+
+        print("\nPlayer 2, look away while Player 1 places their ships.")
+        input("Player 1, press Enter when ready.")
+
+        setup_fleet("Player 1", player_board, player_ships)
+
+        print("\nPlayer 1, look away while Player 2 places their ships.")
+        input("Player 2, press Enter when ready.")
+
+        setup_fleet("Player 2", computer_board, second_player_ships)
+    else:
+        player_ships = create_fleet()
+        computer_ships = create_fleet()
+
+        setup_fleet("Player", player_board, player_ships)
+        setup_computer_fleet(computer_board, computer_ships)
+
+
+
+
+    player_attacker = PlayerAttack()
+    second_player_attacker = PlayerAttack()
 
     computer_previous_attacks = []
-    player_previous_attacks = []
+    
 
-    print("Player board:")
-    print_board(player_board, show_ships=True)
+    player_result = ""
+    opponent_result = ""
 
-    print("Computer board:")
-    print_board(computer_board)
+    opponent_name = "Computer"
+    if game_mode == "Player":
+        opponent_name = "Player 2"
 
+    while not game_state["game_over"]:
+        show_battle_boards(player_board, computer_board, game_mode)
 
-    while game_state["game_over"] == False:
+        # Keep only the latest result for each side.
+        if player_result:
+            print(f"\nPlayer 1: {player_result}")
+        if opponent_result:
+            print(f"{opponent_name}: {opponent_result}")
 
         if game_state["turn"] == player:
-            print("Player's turn")
-            player_attack(computer_board, player_previous_attacks)
-            # call Person 3's attack function here
-
+            print("\nPlayer 1's turn — attack the opponent's board.")
+            player_result = player_attacker.attack(computer_board)
+        elif game_mode == "Computer":
+            opponent_result = computer_attack(
+                player_board, computer_previous_attacks
+            )
         else:
-        
-            if game_mode == "Computer":
-                print("Computers turn")
-                computer_attack(player_board, computer_previous_attacks)
+            print("\nPlayer 2's turn — attack Player 1's board.")
+            opponent_result = second_player_attacker.attack(player_board)
 
-        # call Person 4's attack function here
+        game_state["winner"] = check_winner(player_board, computer_board)
 
-            else:
-                print("Player 2's turn")
-
-        # call the player 2 attack function here
-
-            # call Person 4's attack function here
-
-        # check if someone won
-
-        if game_state["winner"] != None:
+        if game_state["winner"] is not None:
             game_state["game_over"] = True
         else:
             switch_turn()
+
+    # Show the final attack before announcing the winner.
+    show_battle_boards(player_board, computer_board, game_mode)
+    if player_result:
+        print(f"\nPlayer 1: {player_result}")
+    if opponent_result:
+        print(f"{opponent_name}: {opponent_result}")
+
+    winner_name = "Player 1"
+    if game_state["winner"] == computer:
+        winner_name = opponent_name
+    print(f"\n{winner_name} wins!")
+
+
+def show_battle_boards(player_board, computer_board, game_mode):
+    clear_screen()
+
+    opponent_name = "Computer"
+    if game_mode == "Player":
+        opponent_name = "Player 2"
+
+    print("X = hit | O = miss | ~ = unknown\n")
+
+    print("Player 1's board — attacks received:")
+    print_board(player_board, show_ships=False)
+
+    print(f"\n{opponent_name}'s board — attacks received:")
+    print_board(computer_board, show_ships=False)
 
 if __name__ == "__main__":
     

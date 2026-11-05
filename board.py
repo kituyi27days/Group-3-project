@@ -1,7 +1,7 @@
 import argparse
-
+import json
 # --- CONSTANTS ---
-DEFAULT_BOARD_SIZE = 10
+BOARD_SIZE = 10
 EMPTY = "~"
 SHIP = "S"
 HIT = "X"
@@ -9,16 +9,17 @@ MISS = "O"
 
 
 # --- RECURSION REQUIREMENT (Person 1) ---
-def create_board_recursive(size=DEFAULT_BOARD_SIZE, current_row=0):
-    """
+
+def create_board(size=BOARD_SIZE, current_row=0):
+    '''
     Recursively constructs a 2D grid of size x size initialized with '~' cells.
-    Base case: stops when current_row reaches size.
-    """
+    Base case: stops when current_row reaches size.'''
+    
     if current_row >= size:
         return []
     
     row = [EMPTY] * size
-    return [row] + create_board_recursive(size, current_row + 1)
+    return [row] + create_board(size, current_row + 1)
 
 
 # --- BOARD DISPLAY FUNCTION ---
@@ -43,7 +44,7 @@ def print_board(board, show_ships=False):
         print(f"{row_number} | {row_string}")
 
 
-# --- ARGPARSE REQUIREMENT (Person 1) ---
+# --- ARGPARSE REQUIREMENT  ---
 def parse_arguments():
     """
     Parses command-line arguments to customize game parameters.
@@ -54,7 +55,7 @@ def parse_arguments():
     parser.add_argument(
         "--size", 
         type=int, 
-        default=DEFAULT_BOARD_SIZE, 
+        default=BOARD_SIZE, 
         help="Grid size for the board (default: 10)"
     )
     parser.add_argument(
@@ -65,7 +66,22 @@ def parse_arguments():
     return parser.parse_args()
 
 
+def save_board_state(board, filename="savegame.json"):
+
+    with open(filename, "r") as file:
+        save_data = json.load(file)
+
+    save_data["board"] = {
+        "grid": board,
+        "size": len(board)
+    }
+
+    with open(filename, "w") as file:
+        json.dump(save_data, file, indent=4)
+
+
+
 if __name__ == "__main__":
     args = parse_arguments()
-    game_board = create_board_recursive(args.size)
+    game_board = create_board(args.size)
     print_board(game_board, show_ships=args.reveal_ships)
