@@ -81,7 +81,7 @@ changed and how you tested it.
 
 | Student | AI tool(s) used | Used it for |
 |---------|-----------------|-------------|
-| <name>  |                 |             |
+| Nathan Kituyi  |  ChatGpt   |     the clear screen function in the file ship.py        |
 | <name>  |                 |             |
 | <name>  |                 |             |
 | <name>  |                 |             |
