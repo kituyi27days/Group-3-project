@@ -1,5 +1,5 @@
-from board import create_board, print_board, SHIP
-from Computer import computer_attack
+from board import create_board, print_board, SHIP, HIT
+from Computer import ComputerOpponent
 from PlayerAttack import PlayerAttack
 from ship import create_fleet, setup_fleet, setup_computer_fleet, clear_screen
 
@@ -87,6 +87,7 @@ def run_game():
     else:
         player_ships = create_fleet()
         computer_ships = create_fleet()
+        computer_opponent = ComputerOpponent()
 
         setup_fleet("Player", player_board, player_ships)
         setup_computer_fleet(computer_board, computer_ships)
@@ -97,7 +98,6 @@ def run_game():
     player_attacker = PlayerAttack()
     second_player_attacker = PlayerAttack()
 
-    computer_previous_attacks = []
     
 
     player_result = ""
@@ -120,9 +120,17 @@ def run_game():
             print("\nPlayer 1's turn — attack the opponent's board.")
             player_result = player_attacker.attack(computer_board)
         elif game_mode == "Computer":
-            opponent_result = computer_attack(
-                player_board, computer_previous_attacks
-            )
+            # The opponent keeps its own attack history and statistics.
+            attack_coordinates = computer_opponent.computer_attack(player_board)
+
+            if attack_coordinates is None:
+                opponent_result = "All positions have already been attacked."
+            else:
+                row, col = attack_coordinates
+                if player_board[row][col] == HIT:
+                    opponent_result = f"Hit at ({row}, {col})!"
+                else:
+                    opponent_result = f"Miss at ({row}, {col})."
         else:
             print("\nPlayer 2's turn — attack Player 1's board.")
             opponent_result = second_player_attacker.attack(player_board)
