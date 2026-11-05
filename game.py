@@ -7,43 +7,38 @@ from ship import create_fleet, setup_fleet, setup_computer_fleet, clear_screen
 player : str = "Player"
 computer : str = "Computer"
 
-game_state = {
-    "turn" : player,
-    "winner" : None,
-    "game_over" : False,
+class GameController:
 
-}
+    def __init__(self):
+        self.turn = player
+        self.winner = None
+        self.game_over = False
 
-# call the function that has all the ships and let the player place them, we already have the function that checks wether a postion is allowed or not so if it is allowed i'll call the function and make the player select their position for their ships
+    def switch_turn(self):
+        if self.turn == player:
+            self.turn = computer
+        else:
+            self.turn = player
 
+    def check_winner(self, player_board, computer_board):
+        player_has_ships = False
+        computer_has_ships = False
 
-def switch_turn():
-    if game_state["turn"] == player:
-        game_state["turn"] = computer
-    else:
-        game_state["turn"] = player
+        for row in player_board:
+            if SHIP in row:
+                player_has_ships = True
 
+        for row in computer_board:
+            if SHIP in row:
+                computer_has_ships = True
 
-def check_winner(player_board, computer_board):
-    player_has_ships = False
-    computer_has_ships = False
+        if not player_has_ships:
+            return computer
 
-    for row in player_board:
-        if SHIP in row:
-            player_has_ships = True
+        if not computer_has_ships:
+            return player
 
-    for row in computer_board:
-        if SHIP in row:
-            computer_has_ships = True
-
-    if not player_has_ships:
-        return computer
-
-    if not computer_has_ships:
-        return player
-
-    return None
-
+        return None
 
 def choose_game_mode():
     print("Choose game mode:")
@@ -62,10 +57,10 @@ def choose_game_mode():
         return "Player"
 
 def run_game():
-    
+
+    controller = GameController()
 
     game_mode = choose_game_mode()
-
     player_board = create_board()
     computer_board = create_board()
     
@@ -107,7 +102,7 @@ def run_game():
     if game_mode == "Player":
         opponent_name = "Player 2"
 
-    while not game_state["game_over"]:
+    while not controller.game_over:
         show_battle_boards(player_board, computer_board, game_mode)
 
         # Keep only the latest result for each side.
@@ -116,7 +111,7 @@ def run_game():
         if opponent_result:
             print(f"{opponent_name}: {opponent_result}")
 
-        if game_state["turn"] == player:
+        if controller.turn == player:
             print("\nPlayer 1's turn — attack the opponent's board.")
             player_result = player_attacker.attack(computer_board)
         elif game_mode == "Computer":
@@ -135,12 +130,13 @@ def run_game():
             print("\nPlayer 2's turn — attack Player 1's board.")
             opponent_result = second_player_attacker.attack(player_board)
 
-        game_state["winner"] = check_winner(player_board, computer_board)
+        controller.winner = controller.check_winner(player_board, computer_board)
 
-        if game_state["winner"] is not None:
-            game_state["game_over"] = True
+
+        if controller.winner is not None:
+            controller.game_over = True
         else:
-            switch_turn()
+            controller.switch_turn()
 
     # Show the final attack before announcing the winner.
     show_battle_boards(player_board, computer_board, game_mode)
@@ -150,7 +146,7 @@ def run_game():
         print(f"{opponent_name}: {opponent_result}")
 
     winner_name = "Player 1"
-    if game_state["winner"] == computer:
+    if controller.winner["winner"] == computer:
         winner_name = opponent_name
     print(f"\n{winner_name} wins!")
 
