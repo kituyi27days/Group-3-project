@@ -219,8 +219,18 @@ def setup_fleet(player_name: str, board: list[list[str]], fleet: list[Ship]):
     
 def save_ships(player_ships, computer_ships, filename="savegame.json"):
 
-    with open(filename, "r") as file:
-        save_data = json.load(file)
+    try:
+        with open(filename, "r") as file:
+            save_data = json.load(file)
+
+    except (FileNotFoundError, json.JSONDecodeError):
+        save_data = {
+            "board": {},
+            "ships": {},
+            "player_attack": {},
+            "computer": {},
+            "game_state": {}
+        }
 
     save_data["ships"] = {
         "player": [],
@@ -247,5 +257,30 @@ def save_ships(player_ships, computer_ships, filename="savegame.json"):
 
     with open(filename, "w") as file:
         json.dump(save_data, file, indent=4)
+def load_ships(filename="savegame.json"):
 
-  
+    try:
+        with open(filename, "r") as file:
+            save_data = json.load(file)
+
+    except (FileNotFoundError, json.JSONDecodeError):
+        return [], []
+
+    player_ships = []
+    computer_ships = []
+
+    for data in save_data["ships"]["player"]:
+        ship = Ship(data["name"], data["size"])
+        ship.coordinates = [tuple(position) for position in data["coordinates"]]
+        ship.orientation = data["orientation"]
+        ship.hits = data["hits"]
+        player_ships.append(ship)
+
+    for data in save_data["ships"]["computer"]:
+        ship = Ship(data["name"], data["size"])
+        ship.coordinates = [tuple(position) for position in data["coordinates"]]
+        ship.orientation = data["orientation"]
+        ship.hits = data["hits"]
+        computer_ships.append(ship)
+
+    return player_ships, computer_ships

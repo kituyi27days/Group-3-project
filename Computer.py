@@ -93,21 +93,44 @@ class ComputerOpponent:
 
         return attack_row, attack_col
     # SAVE FILE I/O --> reading/writing to json file 
-    def save_data(self): # creats dictionary with the data
-        data = {"difficulty": self.difficulty, "hits": self.hits ,"misses":self.misses ,"attacks": self.computer_previous_attacks}
-
-        with open("computer_s.json","w") as file:
-            json.dump(data, file, indent = 4) #writes data into the file
-    def load_data(self): # LOADS DATA INTO FILE 
+    def save_data(self, filename="savegame.json"):
         try:
-            with open("computer_s.json", "r") as file:
-                data = json.load(file) #load reads the saved data dictionary and restores
+            with open(filename, "r") as file:
+                save_data = json.load(file)
+
+        except (FileNotFoundError, json.JSONDecodeError):
+            save_data = {
+                "board": {},
+                "ships": {},
+                "player_attack": {},
+                "computer": {},
+                "game_state": {}
+        }
+
+        save_data["computer"] = {
+            "difficulty": self.difficulty,
+            "hits": self.hits,
+            "misses": self.misses,
+            "attacks": self.computer_previous_attacks
+    }
+
+        with open(filename, "w") as file:
+            json.dump(save_data, file, indent=4)
+    def load_data(self, filename="savegame.json"):
+        try:
+            with open(filename, "r") as file:
+                save_data = json.load(file)
+
+            data = save_data.get("computer", {})
+
+            if data:
                 self.difficulty = data["difficulty"]
                 self.hits = data["hits"]
                 self.misses = data["misses"]
                 self.computer_previous_attacks = data["attacks"]
-        except FileNotFoundError:
-            print("File does not exist")
+
+        except (FileNotFoundError, json.JSONDecodeError):
+            print("No valid save file exists.")
 
     def all_positions_attacked(self, game_board, position=0): # check if attacked every position on board
         total_positions = len(game_board) * len(game_board[0]) #10*10
