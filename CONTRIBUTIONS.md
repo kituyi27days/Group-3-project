@@ -89,8 +89,8 @@ Elroie Shiferaw- On branch game-control look at game.py
 | <name>  |     |          |           |                   |                     |
 | <name>  |     |          |           |                   |                     |
 | Nathan Kituyi  | 205fa75 | 453be4b |  efe6768 |  ef4fbbc |    |
-| Alesha Husnain  |c7759ee | a8c3566  | e07f827 | 444c421  | 44366c6  |
-| <name>  |     |          |           |                   |                     |
+| Alesha Husnain  |c7759ee | a8c3566 | e07f827 | 444c421  | 44366c6  |
+| Elroie Shiferaw | f075558 |  3631a5c  | --------- |     |          |
 
 ## Milestone 3 - Final Product (Units 04-05)
 
