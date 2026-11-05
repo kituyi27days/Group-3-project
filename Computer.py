@@ -138,8 +138,6 @@ class ComputerOpponent:
         display.geometry("350x350")
 
 
-
-
         # TEST board
         game_board = [[board.EMPTY for col in range(10)]for row in range(10)]
         # add sample ships to the board
@@ -147,21 +145,19 @@ class ComputerOpponent:
         game_board[4][5] = board.SHIP
         game_board[9][9] = board.SHIP
 
-
-
-        # heading
+        # button title
         heading = tk.Label(display, text="BATTLESHIP\nCOMPUTER OPPONENT", font=("Arial", 16, "bold"))
         heading.pack(pady=15)
 
-        # display difficulty
+        # display difficulty chosen to play with
         difficulty_label = tk.Label(display, text="Difficulty: " + self.difficulty, font=("Arial", 12))
         difficulty_label.pack(pady=5)
 
-        # display status
+        # display menu to choose from
         updated_label = tk.Label(display, text="Choose an option:", font=("Arial", 11))
         updated_label.pack(pady=10)
 
-        # display hits, misses and attacks
+        # display hits, misses and attacks counted
         display_label = tk.Label(display,   text="Hits: 0 | Misses: 0 | Attacks: 0",    font=("Arial", 11))
         display_label.pack(pady=5)
 
@@ -181,7 +177,7 @@ class ComputerOpponent:
                 row, col = result
                 updated_label.config(text="Computer attacked row " + str(row)+ ", column " + str(col))
 
-            update_values()
+            update_values()#method call to update counter
         attack_button = tk.Button(display, text="Computer Attack", width=22, command=make_attack)
         attack_button.pack(pady=8)
 
