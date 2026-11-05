@@ -198,10 +198,6 @@ class ComputerOpponent:
         display.mainloop()
 
         
-
-
-
-
         
 #ARGPARSE -->has computer opponents difficulty selection 
 if __name__ == "__main__":  # file can be imported 
