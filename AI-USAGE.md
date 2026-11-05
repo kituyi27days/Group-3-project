@@ -73,7 +73,7 @@ changed and how you tested it.
 |---------|-----------------|-------------|
 | <name>  |                 |             |
 | <name>  |                 |             |
-| <name>  |                 |             |
+| Nathan Kituyi  | ChatGpt | i used it to help me decompose the task and also used it to make my presentation sound better |
 | <name>  |                 |             |
 | <name>  |                 |             |
 
@@ -81,7 +81,7 @@ changed and how you tested it.
 
 | Student | AI tool(s) used | Used it for |
 |---------|-----------------|-------------|
-| <name>  |                 |             |
+| Nathan Kituyi  |  ChatGpt   |     the clear screen function in the file ship.py        |
 | <name>  |                 |             |
 | <name>  |                 |             |
 | <name>  |                 |             |

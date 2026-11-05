@@ -1,8 +1,15 @@
 # =========================================================
 # IMPORTS (From Person 1's board module & constants)
 # =========================================================
-from board import print_board, EMPTY, SHIP, BOARD_SIZE, HORIZONTAL, VERTICAL
+from board import print_board, EMPTY, SHIP, BOARD_SIZE
+import json
+import random
 
+HORIZONTAL = "H"
+VERTICAL = "V"
+
+def clear_screen():
+    print("\033[2J\033[3J\033[H", end="", flush=True) 
 # =========================================================
 # SHIP CLASS (Person 2)
 # =========================================================
@@ -85,10 +92,12 @@ def create_fleet() -> list[Ship]:
         Ship("Destroyer", 2)
     ]
 
-def setup_fleet(player_name: str, board: list[list[str]], fleet: list[Ship]):
-    """
+
+
+"""def setup_fleet(player_name: str, board: list[list[str]], fleet: list[Ship]):
+    
     Interactively prompts the player to place all 5 ships in their fleet onto their 2D game board.
-    """
+    
     print(f"\n==========================================")
     print(f" SHIP PLACEMENT PHASE: {player_name}")
     print(f"==========================================")
@@ -96,7 +105,7 @@ def setup_fleet(player_name: str, board: list[list[str]], fleet: list[Ship]):
     for ship in fleet:
         placed = False
         while not placed:
-            print_board(board)
+            print_board(board, show_ships=True)
             print(f"\nPlacing: {ship.ship_name} (Size: {ship.size})")
             try:
                 row = int(input(f"Enter starting ROW (0-{BOARD_SIZE - 1}): "))
@@ -120,4 +129,123 @@ def setup_fleet(player_name: str, board: list[list[str]], fleet: list[Ship]):
                 print("⚠️ Invalid input! Please enter integer numbers for Row and Column.")
                 
     print(f"\n🎉 All ships successfully placed for {player_name}!\n")
-    print_board(board)
+    print_board(board)"""
+
+def setup_computer_fleet(board, fleet):
+    for ship in fleet:
+        placed = False
+
+        while not placed:
+            row = random.randint(0, BOARD_SIZE - 1)
+            col = random.randint(0, BOARD_SIZE - 1)
+            orientation = random.choice([HORIZONTAL, VERTICAL])
+
+            if ship.validate_placement(board, row, col, orientation):
+                ship.apply_placement(board, row, col, orientation)
+                placed = True
+
+    print("Computer has placed all its ships!")
+
+def setup_fleet(player_name: str, board: list[list[str]], fleet: list[Ship]):
+    confirmations = []
+    error_message = ""
+
+    # Redraw one board and the successful placement messages.
+    def show_placement():
+        clear_screen()
+
+        print(f"SHIP PLACEMENT: {player_name}\n")
+        print_board(board, show_ships=True)
+
+        for message in confirmations:
+            print(message)
+
+        if error_message:
+            print(f"\n{error_message}")
+
+    for ship in fleet:
+        placed = False
+
+        while not placed:
+            show_placement()
+            print(f"\nPlacing: {ship.ship_name} (Size: {ship.size})")
+
+            try:
+                row = int(
+                    input(f"Enter starting ROW (0-{BOARD_SIZE - 1}): ")
+                )
+                col = int(
+                    input(f"Enter starting COL (0-{BOARD_SIZE - 1}): ")
+                )
+                orientation = input(
+                    f"Enter orientation ({HORIZONTAL} for Horizontal, "
+                    f"{VERTICAL} for Vertical): "
+                ).strip().upper()
+
+                if not (0 <= row < BOARD_SIZE and 0 <= col < BOARD_SIZE):
+                    error_message = (
+                        f"Row and Column must be between "
+                        f"0 and {BOARD_SIZE - 1}."
+                    )
+                    continue
+
+                if ship.validate_placement(board, row, col, orientation):
+                    ship.apply_placement(board, row, col, orientation)
+
+                    confirmations.append(
+                        f"✅Successfully placed {ship.ship_name} "
+                        f"at {ship.coordinates}!"
+                    )
+
+                    error_message = ""
+                    placed = True
+                else:
+                    error_message = (
+                        "❌Invalid placement! Check the orientation, "
+                        "board boundaries, and overlapping ships."
+                    )
+
+            except ValueError:
+                error_message = (
+                    "Please enter integer numbers for Row and Column."
+                )
+
+    # Show the completed board with every ship visible.
+    show_placement()
+    print(f"\n🎉 All ships successfully placed for {player_name}!")
+
+    input("Review your board, then press Enter to close it.")
+    clear_screen()
+    
+def save_ships(player_ships, computer_ships, filename="savegame.json"):
+
+    with open(filename, "r") as file:
+        save_data = json.load(file)
+
+    save_data["ships"] = {
+        "player": [],
+        "computer": []
+    }
+
+    for ship in player_ships:
+        save_data["ships"]["player"].append({
+            "name": ship.ship_name,
+            "size": ship.size,
+            "coordinates": ship.coordinates,
+            "orientation": ship.orientation,
+            "hits": ship.hits
+        })
+
+    for ship in computer_ships:
+        save_data["ships"]["computer"].append({
+            "name": ship.ship_name,
+            "size": ship.size,
+            "coordinates": ship.coordinates,
+            "orientation": ship.orientation,
+            "hits": ship.hits
+        })
+
+    with open(filename, "w") as file:
+        json.dump(save_data, file, indent=4)
+
+  

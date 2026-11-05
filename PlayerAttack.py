@@ -1,97 +1,194 @@
-"""
-Player Attack System
+from board import SHIP, HIT, MISS, BOARD_SIZE
+import json
+import argparse
 
-Purpose:  
-The purpose of the player attack system is to allow the player to choose a position on the opponents board to attack and determine whether the attack is a hit or a miss.
+parser = argparse.ArgumentParser()
 
-Inputs:  
-- Row chosen by the player  
-- Column chosen by the player  
-- Opponent’s board  
-- Previous attack locations  
+parser.add_argument(
+    "--show-history",
+    action="store_true",
+    help="Show the player's previous attack coordinates"
+)
 
-Steps:  
-1. Ask the player to enter a row and column to attack.  
-2. Check that the chosen position is inside the board.  
-3. Check that the player has not already attacked that position.  
-4. Check whether there is a ship at the chosen position.  c
-5. Record the attack as either a hit or a miss.  
-6. Update the board and save the attacked position.
+args = parser.parse_args()
 
-Data needed:  
-- The opponent’s board  
-- A list of previous attacks  
-- The row and column chosen by the player  
-- Values used to represent ships, hits, misses, and empty spaces
-"""
-BOARD_SIZE = 10
-SHIP = "S"
-HIT = "X"
-MISS = "O"
 
-# Stores coordinates the player has already attacked
-previous_attacks = []
 
-#Function to get the attack coordinates from the player and validate them
-def get_attack_coordinates():
 
-    attack_row = int(input("Enter the row you want to attack between 0 and 9 (inclusive): "))
-    attack_column = int(input("Enter the column you want to attack between 0 and 9 (inclusive): "))
 
-    flag = False
+class PlayerAttack:
 
-    while flag == False:
+    def __init__(self, show_history=False):
+        self.previous_attacks = []
+        self.hits = 0
+        self.misses = 0
+        self.show_history = show_history 
+
+
+    def get_attack_coordinates(self):
+
+        valid_coordinates = False
+
+        while valid_coordinates == False:
+
+            try:
+                attack_row = int(
+                    input("Enter the row you want to attack between 0 and 9 (inclusive): ")
+                )
+
+                attack_column = int(
+                    input("Enter the column you want to attack between 0 and 9 (inclusive): ")
+                )
+
+                if attack_row < 0 or attack_row >= BOARD_SIZE:
+                    print("Invalid row. Please enter a value between 0 and 9.")
+
+                elif attack_column < 0 or attack_column >= BOARD_SIZE:
+                    print("Invalid column. Please enter a value between 0 and 9.")
+
+                else:
+                    valid_coordinates = True
+
+            except ValueError:
+                print("Please enter numbers only.")
+
+        return attack_row, attack_column
+
+
+    def already_attacked(self, row, column):
+
+        if [row, column] in self.previous_attacks:
+            return True
+
+        else:
+            return False
+
+
+    def record_attack(self, row, column):
+
+        self.previous_attacks.append([row, column])
+
+
+    def attack(self, board):
+
+        attack_row, attack_column = self.get_attack_coordinates()
+
+        if self.already_attacked(attack_row, attack_column):
+            print("You already attacked this location. Choose another location.")
+            return self.attack(board)
+
+        self.record_attack(attack_row, attack_column)
+
+        if board[attack_row][attack_column] == SHIP:
+            board[attack_row][attack_column] = HIT
+            self.hits += 1
+            return f"Hit at ({attack_row}, {attack_column})!"
+        else:
+            board[attack_row][attack_column] = MISS
+            self.misses += 1
+            return f"Miss at ({attack_row}, {attack_column})."
+
+
+    def attack_at(self, board, attack_row, attack_column):
 
         if attack_row < 0 or attack_row >= BOARD_SIZE:
-            print("Invalid row. Please enter a value between 0 and 9.")
+            return "Invalid row"
 
-            attack_row = int(input("Enter the row you want to attack between 0 and 9 (inclusive): "))
+        if attack_column < 0 or attack_column >= BOARD_SIZE:
+            return "Invalid column"
 
-        elif attack_column < 0 or attack_column >= BOARD_SIZE:
-            print("Invalid column. Please enter a value between 0 and 9.")
+        if self.already_attacked(attack_row, attack_column):
+            return "Already attacked"
 
-            attack_column = int(input("Enter the column you want to attack between 0 and 9 (inclusive): "))
+        self.record_attack(attack_row, attack_column)
 
-        else:
-            flag = True
-
-    return attack_row, attack_column
-
-#Function to check if the player has already attacked the chosen position
-def already_attacked(attack_row, attack_column, previous_attacks):
-
-    if [attack_row, attack_column] in previous_attacks:
-        return True
-
-    else:
-        return False
-
-#Function to store the attack coordinates in the previous_attacks list
-def record_attack(attack_row, attack_column, previous_attacks):
-
-    previous_attacks.append([attack_row, attack_column])
-
-#Function to handle the player's attack on the opponent's board
-def player_attack(board, previous_attacks):
-
-    valid_attack = False
-
-    while valid_attack == False:
-
-        attack_row, attack_column = get_attack_coordinates()
-
-        if already_attacked(attack_row, attack_column, previous_attacks):
-            print("You already attacked this location. Choose another location.")
+        if board[attack_row][attack_column] == SHIP:
+            board[attack_row][attack_column] = HIT
+            self.hits += 1
+            return "Hit!"
 
         else:
-            record_attack(attack_row, attack_column, previous_attacks)
+            board[attack_row][attack_column] = MISS
+            self.misses += 1
+            return "Miss!"
+    
 
-            if board[attack_row][attack_column] == SHIP:
-                board[attack_row][attack_column] = HIT
-                print("Hit!")
+    def to_dict(self):
 
-            else:
-                board[attack_row][attack_column] = MISS
-                print("Miss!")
+        data = {
+            "previous_attacks": self.previous_attacks,
+            "hits": self.hits,
+            "misses": self.misses
+        }
 
-            valid_attack = True
+        return data
+
+
+    def from_dict(self, data):
+
+        self.previous_attacks = data["previous_attacks"]
+        self.hits = data["hits"]
+        self.misses = data["misses"]
+
+
+    def save_state(self, filename="savegame.json"):
+
+        try:
+            with open(filename, "r") as file:
+                save_data = json.load(file)
+
+        except FileNotFoundError:
+            save_data = {
+                "board": {},
+                "ships": {},
+                "player_attack": {},
+                "computer": {},
+                "game_state": {}
+            }
+
+        except json.JSONDecodeError:
+            save_data = {
+                "board": {},
+                "ships": {},
+                "player_attack": {},
+                "computer": {},
+                "game_state": {}
+            }
+
+        save_data["player_attack"] = self.to_dict()
+
+        with open(filename, "w") as file:
+            json.dump(save_data, file, indent=4)
+
+
+    def load_state(self, filename="savegame.json"):
+
+        try:
+            with open(filename, "r") as file:
+                save_data = json.load(file)
+
+            if "player_attack" in save_data:
+
+                player_attack_data = save_data["player_attack"]
+
+                if player_attack_data != {}:
+                    self.from_dict(player_attack_data)
+
+        except FileNotFoundError:
+            print("No saved game was found.")
+
+        except json.JSONDecodeError:
+            print("The save file is empty or invalid.")
+
+    
+
+
+
+
+
+    
+
+
+        
+
+
