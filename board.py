@@ -66,22 +66,31 @@ def parse_arguments():
     return parser.parse_args()
 
 
-def save_board_state(board, filename="savegame.json"):
+def save_board_state(player_board, computer_board, filename="savegame.json"):
 
-    with open(filename, "r") as file:
-        save_data = json.load(file)
+    try:
+        with open(filename, "r") as file:
+            save_data = json.load(file)
+
+    except (FileNotFoundError, json.JSONDecodeError):
+        save_data = {
+            "board": {},
+            "ships": {},
+            "player_attack": {},
+            "computer": {},
+            "game_state": {}
+        }
 
     save_data["board"] = {
-        "grid": board,
-        "size": len(board)
+        "player": {
+            "grid": player_board,
+            "size": len(player_board)
+        },
+        "computer": {
+            "grid": computer_board,
+            "size": len(computer_board)
+        }
     }
 
     with open(filename, "w") as file:
         json.dump(save_data, file, indent=4)
-
-
-
-if __name__ == "__main__":
-    args = parse_arguments()
-    game_board = create_board(args.size)
-    print_board(game_board, show_ships=args.reveal_ships)
